@@ -5,12 +5,13 @@ import cyanWatch from "../assets/cyan.png";
 import blackWatch from "../assets/black.png";
 import blue from "../assets/skyblue.png";
 import { FaMinus, FaPlus, FaShoppingCart } from "react-icons/fa";
+import { CiHeart } from "react-icons/ci";
 
 const bandColors = [
-    { color: "Purple", value: "#8a2be2", image: purpleWatch },
-    { color: "Cyan", value: "#00bcd4", image: cyanWatch },
-    { color: "Black", value: "#000", image: blackWatch },
-    { color: "Blue", value: "", image: blue },
+    { color: "Purple", value: "#816BFF", image: purpleWatch },
+    { color: "Cyan", value: "#1FCEC9", image: cyanWatch },
+    { color: "Black", value: "#3B4747", image: blackWatch },
+    { color: "Blue", value: "#4B97D3", image: blue },
 ];
 
 const ProductDetails = () => {
@@ -59,13 +60,13 @@ const ProductDetails = () => {
     );
 
     return (
-        <div className="relative p-5 rounded-lg">
-            <div className="flex flex-col md:flex-row items-center mx-auto w-11/12">
+        <div className="relative p-5 rounded-lg text-[#8091A7]">
+            <div className="flex flex-col md:flex-row items-center mx-auto w-11/12 pb-2">
                 <div className="">
                     <img
                         src={selectedColor.image}
                         alt="Watch Thumbnail"
-                        className="w-3/4"
+                        className=""
                     />
                 </div>
 
@@ -75,59 +76,71 @@ const ProductDetails = () => {
                     </h2>
 
                     <div className="flex items-center text-sm font-normal ">
-                    <ReactStars
-                        count={5}
-                        value={3.5}
-                        size={24}
-                        isHalf={true}
-                        edit={false}
-                        activeColor="#ffd700"
-                    />
-                    <span className="text-[#8091A7]">(2 Reviews)</span>
+                        <ReactStars
+                            count={5}
+                            value={3.5}
+                            size={24}
+                            isHalf={true}
+                            edit={false}
+                            activeColor="#ffd700"
+                        />
+                        <span className="text-[#8091A7]">(2 Reviews)</span>
                     </div>
 
-                    <div className="flex items-center mb-2 text-lg">
-                        <span className="line-through text-gray-500 mr-2">$99.00</span>
-                        <span className="text-blue-500 font-bold">
-                            ${getSizePrice(selectedSize)}.00
+                    <div className="flex items-center mb-2 text-xl text-[#8091A7] py-2">
+                        <span className="line-through mr-2">$99.00</span>
+                        <span className="text-[#6576ff] font-bold text-2xl">
+                            ${getSizePrice(selectedSize).toFixed(2)}
                         </span>
                     </div>
 
-                    <p className="text-gray-400 mb-4">
-                        I must explain to you how this mistaken idea of denouncing pleasure
-                        was born. I will give you a complete account.
+                    <p className="text-[#8091A7] text-lg font-normal mb-4 w-1/2">
+                        I must explain to you how all this mistaken idea of denoun cing ple praising pain was born and I will give you a complete account of the system, and expound the actual teaching.
                     </p>
 
+                    <table className="table-auto border-collapse w-full text-left my-4">
+                        <tbody>
+                            <tr>
+                                <td className="  py-2">Type</td>
+                                <td className="  py-2">Model Number</td>
+                            </tr>
+                            <tr>
+                                <td className="text-base font-bold text-[#364A63]">Watch</td>
+                                <td className="text-base font-bold text-[#364A63]">Forerunner 290XT</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
                     <div className="mb-4">
-                        <h4 className="text-gray-300 font-medium mb-1">Band Color</h4>
+                        <h4 className="font-bold text-[#364A63] mb-1 text-lg">Band Color</h4>
                         <div className="flex space-x-2">
                             {bandColors.map((band) => (
                                 <span
                                     key={band.color}
-                                    className={`w-8 h-8 rounded-full cursor-pointer border-2 ${
-                                        selectedColor.color === band.color
-                                            ? "border-blue-500"
-                                            : "border-gray-600"
-                                    }`}
-                                    style={{ backgroundColor: band.value }}
+                                    className={`w-6 h-6 rounded-full cursor-pointer border-2 ${selectedColor.color === band.color ? "border-blue-500 p-1" : "border-gray-600"
+                                        }  bg-[${band.value}]`}
+                                    style={{
+                                        backgroundColor: band.value,
+                                    }}
                                     onClick={() => setSelectedColor(band)}
                                 ></span>
                             ))}
                         </div>
+
                     </div>
 
                     <div className="mb-4">
-                        <h4 className="text-gray-300 font-medium mb-1">Wrist Size</h4>
-                        <div className="flex space-x-2">
+                        <h4 className="  font-medium mb-1">Wrist Size</h4>
+                        <div className="flex space-x-2 font-bold">
                             {["S", "M", "L", "XL"].map((size) => (
                                 <button
                                     key={size}
                                     onClick={() => setSelectedSize(size)}
-                                    className={`border rounded-md px-3 py-1 ${
-                                        selectedSize === size
-                                            ? "bg-blue-500 text-white"
-                                            : "border-gray-600 text-gray-400"
-                                    }`}
+                                    className={`border rounded-md px-3 py-1 ${selectedSize === size
+                                        ? "border-[#6576FF] text-[#6576FF]"
+                                        : "border-gray-600 text-[#364A63]"
+                                        }`}
                                 >
                                     {size}
                                 </button>
@@ -135,30 +148,115 @@ const ProductDetails = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center space-x-4 mb-5">
+                    <div className="flex gap-2 items-center"><div className="flex items-center ">
                         <button
                             onClick={() => handleQuantityChange(-1)}
-                            className="border p-2 rounded-md bg-gray-700 hover:bg-gray-600"
+                            className="border p-2 rounded-md   "
                         >
                             <FaMinus />
                         </button>
-                        <span>{quantity}</span>
+                        <p className="text-black px-1">{quantity}</p>
                         <button
                             onClick={() => handleQuantityChange(1)}
-                            className="border p-2 rounded-md bg-gray-700 hover:bg-gray-600"
+                            className="border p-2 rounded-md   "
                         >
                             <FaPlus />
                         </button>
+
                     </div>
 
-                    <button
-                        onClick={handleAddToCart}
-                        className="bg-blue-500 px-5 py-2 text-white rounded-md hover:bg-blue-600"
-                    >
-                        Add to Cart
-                    </button>
+                        <button
+                            onClick={handleAddToCart}
+                            className="bg-blue-500 px-5 py-2 text-white rounded-md hover:bg-blue-600"
+                        >
+                            Add to Cart
+                        </button>
+                        <CiHeart className="w-6 h-6" />
+                        </div>
                 </div>
             </div>
+
+            
+                <button
+                    onClick={() => setShowModal(true)}
+                    className="mx-auto bottom-5 right-5 bg-blue-500 px-5 py-2  text-white rounded-full flex items-center space-x-2 shadow-lg"
+                >
+                    <FaShoppingCart />
+                    <span>{cart.length}</span>
+                </button>
+           
+
+            {showModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white   rounded-lg w-11/12 md:w-2/3 lg:w-1/2 shadow-lg overflow-hidden">
+                        <div className="p-5">
+                            <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
+                        </div>
+
+                        <div className="p-5">
+                            <table className="w-full text-left border-collapse">
+                                <thead>
+                                    <tr className="border-b">
+                                        <th className="pb-2  ">Item</th>
+                                        <th className="pb-2  ">Color</th>
+                                        <th className="pb-2  ">Size</th>
+                                        <th className="pb-2  ">Qnt</th>
+                                        <th className="pb-2   text-right">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {cart.map((item, index) => (
+                                        <tr key={index} className="border-b">
+                                            <td className="py-2 flex items-center">
+                                                <img
+                                                    src={item.image}
+                                                    alt="Cart Item"
+                                                    className="w-12 h-12 rounded-md mr-3"
+                                                />
+                                                <span className="text-gray-700">Classy Modern Smart Watch</span>
+                                            </td>
+                                            <td className="py-2 text-gray-700">{item.color}</td>
+                                            <td className="py-2 font-bold text-gray-700">{item.size}</td>
+                                            <td className="py-2 text-gray-700">{item.quantity}</td>
+                                            <td className="py-2 font-bold text-gray-700 text-right">
+                                                ${item.price * item.quantity}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                                <tfoot>
+                                    <tr className="">
+                                        <td>Total: </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td className="py-2 text-gray-700">{totalItems}</td>
+                                        <td className="py-2 font-bold text-gray-700 text-right">${totalPrice}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+
+
+
+
+                        <div className="p-5 flex justify-end">
+                            <button
+                                onClick={() => setShowModal(false)}
+                                className="px-5 py-2 border rounded-md text-gray-600 hover:bg-gray-100"
+                            >
+                                Continue Shopping
+                            </button>
+                            <button
+                                className="bg-blue-500 px-5 py-2 text-white rounded-md hover:bg-blue-600"
+                            >
+                                Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };
