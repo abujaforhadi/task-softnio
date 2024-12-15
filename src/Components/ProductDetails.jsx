@@ -60,9 +60,9 @@ const ProductDetails = () => {
     );
 
     return (
-        <div className="relative p-5 rounded-lg text-[#8091A7]">
+        <div className=" p-5 rounded-lg text-[#8091A7]">
             <div className="flex flex-col md:flex-row items-center mx-auto w-11/12 pb-2">
-                <div className="">
+                <div className="w-full">
                     <img
                         src={selectedColor.image}
                         alt="Watch Thumbnail"
@@ -131,22 +131,24 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="mb-4">
-                        <h4 className="  font-medium mb-1">Wrist Size</h4>
+                        <h4 className="font-medium mb-1">Wrist Size</h4>
                         <div className="flex space-x-2 font-bold">
                             {["S", "M", "L", "XL"].map((size) => (
                                 <button
                                     key={size}
                                     onClick={() => setSelectedSize(size)}
-                                    className={`border rounded-md px-3 py-1 ${selectedSize === size
+                                    className={`border rounded-md px-3 py-1 flex items-center gap-1 ${selectedSize === size
                                         ? "border-[#6576FF] text-[#6576FF]"
                                         : "border-gray-600 text-[#364A63]"
                                         }`}
                                 >
-                                    {size}
+                                    <span>{size}</span>
+                                    <span className="text-sm ">${getSizePrice(size)}</span>
                                 </button>
                             ))}
                         </div>
                     </div>
+
 
                     <div className="flex gap-2 items-center"><div className="flex items-center ">
                         <button
@@ -172,53 +174,53 @@ const ProductDetails = () => {
                             Add to Cart
                         </button>
                         <CiHeart className="w-6 h-6" />
-                        </div>
+                    </div>
                 </div>
             </div>
 
-            
-                <button
-                    onClick={() => setShowModal(true)}
-                    className="mx-auto bottom-5 right-5 bg-blue-500 px-5 py-2  text-white rounded-full flex items-center space-x-2 shadow-lg"
-                >
-                    <FaShoppingCart />
-                    <span>{cart.length}</span>
-                </button>
-           
+
+            <button
+                onClick={() => setShowModal(true)}
+                className="mx-auto bottom-5 right-5 bg-blue-500 px-5 py-2 mt-5  text-white rounded-full flex items-center space-x-2 shadow-lg"
+            >
+                <FaShoppingCart />
+                <span>{cart.length}</span>
+            </button>
+
 
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white   rounded-lg w-11/12 md:w-2/3 lg:w-1/2 shadow-lg overflow-hidden">
                         <div className="p-5">
-                            <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
+                            <h2 className="text-[22px] font-bold text-[#364A63]">Your Cart</h2>
                         </div>
 
                         <div className="p-5">
                             <table className="w-full text-left border-collapse">
                                 <thead>
-                                    <tr className="border-b">
-                                        <th className="pb-2  ">Item</th>
-                                        <th className="pb-2  ">Color</th>
-                                        <th className="pb-2  ">Size</th>
-                                        <th className="pb-2  ">Qnt</th>
-                                        <th className="pb-2   text-right">Price</th>
+                                    <tr className="border-b text-[#8091A7] text-sm pb-2">
+                                        <th className="  ">Item</th>
+                                        <th className="  ">Color</th>
+                                        <th className="  ">Size</th>
+                                        <th className="  ">Qnt</th>
+                                        <th className="   text-right">Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {cart.map((item, index) => (
                                         <tr key={index} className="border-b">
-                                            <td className="py-2 flex items-center">
+                                            <td className="py-2 flex items-center text-[#364A63]">
                                                 <img
                                                     src={item.image}
                                                     alt="Cart Item"
                                                     className="w-12 h-12 rounded-md mr-3"
                                                 />
-                                                <span className="text-gray-700">Classy Modern Smart Watch</span>
+                                                <span >Classy Modern Smart Watch</span>
                                             </td>
-                                            <td className="py-2 text-gray-700">{item.color}</td>
-                                            <td className="py-2 font-bold text-gray-700">{item.size}</td>
-                                            <td className="py-2 text-gray-700">{item.quantity}</td>
-                                            <td className="py-2 font-bold text-gray-700 text-right">
+                                            <td className="py-2 ">{item.color}</td>
+                                            <td className="py-2 font-bold ">{item.size}</td>
+                                            <td className="py-2 font-bold ">{item.quantity}</td>
+                                            <td className="py-2 font-bold  text-right">
                                                 ${item.price * item.quantity}
                                             </td>
                                         </tr>
@@ -229,8 +231,8 @@ const ProductDetails = () => {
                                         <td>Total: </td>
                                         <td></td>
                                         <td></td>
-                                        <td className="py-2 text-gray-700">{totalItems}</td>
-                                        <td className="py-2 font-bold text-gray-700 text-right">${totalPrice}</td>
+                                        <td className="py-2 font-bold text-base">{totalItems}</td>
+                                        <td className="py-2 font-bold  text-right">${totalPrice}</td>
                                     </tr>
                                 </tfoot>
                             </table>
